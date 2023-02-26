@@ -1,0 +1,51 @@
+/dataset/LVIS/data/val2017/*
+/dataset/LVIS/data/train2017/*
+/dataset/LVIS/data/all2017/*
+**/.DS_Store
+dataset/LVIS/data/lvis_v1_val.json
+dataset/LVIS/data/lvis_v1_train.json
+dataset/LVIS/selected_img
+dataset/LVIS/selected_label
+dataset/federated_dataset/
+dataset/OpenImages/data
+dataset/OpenImages/selected_img
+dataset/OpenImages/selected_label
+dataset/annotations/*
+dataset/annotations (old)/*
+dataset/images/*
+dataset/new annotations/*
+dataset/new annotations(wrong one)/*
+dataset/new annotations (no manuallabel)/*
+dataset/original labels/*
+dataset/runs/*
+dataset/lightning_logs/*
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+results/annotations/*
+results/wandb/*
+results/new annotations/*
+results/annotations (wrong one)/*
+results/dataset/*
+results/images/*
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.zip
+*.pyc
