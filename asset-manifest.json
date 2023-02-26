@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/DIPA_test_settings/static/css/main.fa8ddeef.css",
-    "main.js": "/DIPA_test_settings/static/js/main.46ac5d2e.js",
+    "main.js": "/DIPA_test_settings/static/js/main.51dfa00b.js",
     "static/js/787.9e9b56fd.chunk.js": "/DIPA_test_settings/static/js/787.9e9b56fd.chunk.js",
     "static/media/demo_jp.png": "/DIPA_test_settings/static/media/demo_jp.5286520d861bcd56fe95.png",
     "static/media/demo_en.png": "/DIPA_test_settings/static/media/demo_en.1a2a02ea115c91919358.png",
@@ -15,11 +15,11 @@
     "static/media/finish_jp.png": "/DIPA_test_settings/static/media/finish_jp.467af7893690ae985e2a.png",
     "index.html": "/DIPA_test_settings/index.html",
     "main.fa8ddeef.css.map": "/DIPA_test_settings/static/css/main.fa8ddeef.css.map",
-    "main.46ac5d2e.js.map": "/DIPA_test_settings/static/js/main.46ac5d2e.js.map",
+    "main.51dfa00b.js.map": "/DIPA_test_settings/static/js/main.51dfa00b.js.map",
     "787.9e9b56fd.chunk.js.map": "/DIPA_test_settings/static/js/787.9e9b56fd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fa8ddeef.css",
-    "static/js/main.46ac5d2e.js"
+    "static/js/main.51dfa00b.js"
   ]
 }
