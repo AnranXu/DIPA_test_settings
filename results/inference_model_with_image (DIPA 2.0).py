@@ -29,7 +29,7 @@ if __name__ == '__main__':
     bigfives = ["extraversion", "agreeableness", "conscientiousness",
     "neuroticism", "openness"]
     basic_info = [ "age", "gender", "platform", 'datasetName', 'frequency', 
-                  'privacyNum', 'concern0', 'concern1', 'concern2', 'concern3']
+                  'privacyNum', 'concern1', 'concern2', 'concern3']
     category = ['category']
     privacy_metrics = ['informationType', 'informativeness', 'sharingOwner', 'sharingOthers']
 
@@ -81,11 +81,11 @@ if __name__ == '__main__':
     train_loader = DataLoader(train_dataset, batch_size=64, generator=torch.Generator(device='cuda'), shuffle=True)
     val_loader = DataLoader(val_dataset, generator=torch.Generator(device='cuda'), batch_size=32)
     
-    wandb_logger = WandbLogger(project="concern question test (uncompleted collection)", name = '4 concern questions (Resnet 50)')
-    checkpoint_callback = ModelCheckpoint(dirpath='./models/4 concern questions (Resnet 50)/', save_last=True, monitor='val loss')
+    wandb_logger = WandbLogger(project="concern question test (uncompleted collection)", name = '3 concern questions (Resnet 50)')
+    checkpoint_callback = ModelCheckpoint(dirpath='./models/3 concern questions (Resnet 50)/', save_last=True, monitor='val loss')
 
     trainer = pl.Trainer(accelerator='gpu', devices=[0],logger=wandb_logger, 
-    auto_lr_find=True, max_epochs = 300, callbacks=[checkpoint_callback])
+    auto_lr_find=True, max_epochs = 100, callbacks=[checkpoint_callback])
     lr_finder = trainer.tuner.lr_find(model, train_loader)
     model.hparams.learning_rate = lr_finder.suggestion()
     print(f'lr auto: {lr_finder.suggestion()}')

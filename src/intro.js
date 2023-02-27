@@ -14,7 +14,7 @@ class Intro extends Component{
         this.state = {curStep: 0};
         this.bigfiveRef = [];
         this.bigfiveAns = new Array(10).fill('0');
-        this.concernAns = new Array(4).fill('0');
+        this.concernAns = new Array(3).fill('0');
         this.gender = '';
         this.frequency = '';
         //this.name = React.createRef();
@@ -208,12 +208,10 @@ class Intro extends Component{
         console.log(this.bigfiveAns);
     }
     privacyConcerns = () =>{
-        var questions = {'en':['I am concerned about my privacy.',
-        'I will pay attention to my privacy when sharing photos.',
+        var questions = {'en':['I will pay attention to my privacy when sharing photos.',
         'I will be angry with someone who shares photos containing me.',
         'I value other people\'s privacy'],
-        'jp': ['私は個人情報保護に配慮している。',
-        '私は写真を共有するときは、プライバシーに配慮します。',
+        'jp': ['私は写真を共有するときは、プライバシーに配慮します。',
         '私は私を含む写真を共有する人に怒る。',
         '私は他人のプライバシーを尊重する。']};
         var answer = {'en': ['Strongly disagree', 'Disagree', 'Slightly disagree', 
