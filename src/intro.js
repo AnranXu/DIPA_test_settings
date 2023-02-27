@@ -14,6 +14,7 @@ class Intro extends Component{
         this.state = {curStep: 0};
         this.bigfiveRef = [];
         this.bigfiveAns = new Array(10).fill('0');
+        this.concernAns = new Array(4).fill('0');
         this.gender = '';
         this.frequency = '';
         //this.name = React.createRef();
@@ -43,6 +44,7 @@ class Intro extends Component{
         'workerId': {'en': 'Worker\'s ID:', 
         'jp': 'ユーザ名:'},
         'frequency': {'en': 'How often do you share pictures taken by you on social media?', 'jp': '自分で撮った写真をどれくらいの頻度でSNSでシェアしていますか？'},
+        'concernTitle': {'en': 'Please answer the following questions.', 'jp': '以下の質問にお答えください。'},
         'bigfiveTitle': {'en': 'Please answer the following questions.', 'jp': '以下の質問にお答えください。'},
         'confirmText0': {'en': 'I fully understand the study and want to do this task with my consent.', 'jp': '私はこの研究を十分に理解し、同意の上でこの作業を行いたいです。'},
         'confirmText1': {'en': '(You may back to read the instruction later if you need)', 'jp': '（（必要であれば、後で説明書を読み返すことができます）'},
@@ -113,6 +115,16 @@ class Intro extends Component{
             alert(alertText['nationality'][this.props.language]);
             return;
         }
+        for(var i = 0; i < 4; i++)
+        {
+            if(this.concernAns[i] === '0')
+            {
+                ifFinished = false;
+                console.log('break');
+                alert(alertText['bigfive'][this.props.language]);
+                return;
+            }
+        }
         // check bigfive
         for(var i = 0; i < 10; i++)
         {
@@ -130,7 +142,9 @@ class Intro extends Component{
             var anws = {'age': this.age.current.value,
             'gender': this.gender, 'nationality': this.nationality.current.value,
             'frequency': this.frequency,
-            'workerId': this.toHalfWidth(this.workerId.current.value), 'bigfives': this.bigfiveAns};
+            'workerId': this.toHalfWidth(this.workerId.current.value), 
+            'concerns': this.concernAns,
+            'bigfives': this.bigfiveAns};
             this.awsHandler.updateQuestionnaire(anws, this.workerId.current.value);
             //exist bugs when back to intro then go to the interface
             if(this.ifFirstLoad)
@@ -192,6 +206,40 @@ class Intro extends Component{
         
         this.bigfiveAns[parseInt(e.target.name.split('-')[1])] = e.target.value;
         console.log(this.bigfiveAns);
+    }
+    privacyConcerns = () =>{
+        var questions = {'en':['I am concerned about my privacy.',
+        'I will pay attention to my privacy when sharing photos.',
+        'I will be angry with someone who shares photos containing me.',
+        'I value other people\'s privacy'],
+        'jp': ['私は個人情報保護に配慮している。',
+        '私は写真を共有するときは、プライバシーに配慮します。',
+        '私は私を含む写真を共有する人に怒る。',
+        '私は他人のプライバシーを尊重する。']};
+        var answer = {'en': ['Strongly disagree', 'Disagree', 'Slightly disagree', 
+        'Neither', 'Slightly agree', 'Agree', 'Strongly agree'],
+        'jp': ['強く思わない', 'そう思わない', 'ややそう思わない', 'どちらともいえない', '少しそう思う',
+        'そう思う', '強くそう思う']};
+
+        return questions[this.props.language].map((question,i)=>(
+        <div>
+            <Card.Text style={{ textAlign: 'left'}}><h4>{question}</h4></Card.Text>
+            <div defaultValue={'0'} key = {'concern-' + String(i)} ref={this.bigfiveRef[i]} className={'radioButton'} onChange={this.getConcerns}>
+                <input type="radio" value="1" key={'concern-' + String(i) + '-1'} name={'question-' + String(i)} /> {answer[this.props.language][0]}
+                <input type="radio" value="2" key={'concern-' + String(i) + '-2'} name={'question-' + String(i)} /> {answer[this.props.language][1]}
+                <input type="radio" value="3" key={'concern-' + String(i) + '-3'} name={'question-' + String(i)} /> {answer[this.props.language][2]}
+                <input type="radio" value="4" key={'concern-' + String(i) + '-4'} name={'question-' + String(i)} /> {answer[this.props.language][3]}
+                <input type="radio" value="5" key={'concern-' + String(i) + '-5'} name={'question-' + String(i)} /> {answer[this.props.language][4]}
+                <input type="radio" value="6" key={'concern-' + String(i) + '-6'} name={'question-' + String(i)} /> {answer[this.props.language][5]}
+                <input type="radio" value="7" key={'concern-' + String(i) + '-7'} name={'question-' + String(i)} /> {answer[this.props.language][6]}
+            </div>
+            <br></br>
+        </div>
+        ));
+    }
+    getConcerns = (e)=>{
+        this.concernAns[parseInt(e.target.name.split('-')[1])] = e.target.value;
+        console.log(this.concernAns);
     }
     taskIntroEn = (e) =>{
         var loading = require('./img/demo_en.png');
@@ -598,6 +646,13 @@ class Intro extends Component{
                         <input type="radio" value={3} name="frequency" key={'frequency-4'}/> {this.frequencyText[this.props.language][3]}
                         <input type="radio" value={4} name="frequency" key={'frequency-5'}/> {this.frequencyText[this.props.language][4]}
                     </div>
+                    <br></br>
+                    <br></br>
+                    <Card.Text style={{ textAlign: 'left'}}>
+                        <h3>{this.text['concernTitle'][this.props.language]}</h3>
+                    </Card.Text>
+                    {this.privacyConcerns()}
+                    <br></br>
                     <br></br>
                     <Card.Text style={{ textAlign: 'left'}}>
                         <h3>{this.text['bigfiveTitle'][this.props.language]}</h3>
