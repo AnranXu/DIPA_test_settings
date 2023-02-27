@@ -115,7 +115,7 @@ class Intro extends Component{
             alert(alertText['nationality'][this.props.language]);
             return;
         }
-        for(var i = 0; i < 4; i++)
+        for(var i = 0; i < this.concernAns.length; i++)
         {
             if(this.concernAns[i] === '0')
             {
