@@ -356,7 +356,8 @@ class analyzer:
         with open('worker_privacy_num.json', encoding="utf-8") as f:
             worker_privacy_num = json.load(f)
         # image_wise_regression_table.csv
-        image_wise_regression_table = pd.DataFrame(columns=['age', "gender", "platform", 'privacyNum', 'frequency', 'ifPrivacy'])
+        image_wise_regression_table = pd.DataFrame(columns=['age', "gender", "platform", 'privacyNum', 'frequency',
+                                                             'concern0', 'concern1', 'concern2', 'concern3', 'ifPrivacy'])
         for image_name in self.img_annotation_map.keys():
             for platform, annotations in self.img_annotation_map[image_name].items():
                 for annotation in annotations:
@@ -386,6 +387,10 @@ class analyzer:
                             age = 5
                         gender = worker['gender']
                         frequency = worker['frequency']
+                        concern0 = worker['concerns'][0]
+                        concern1 = worker['concerns'][1]
+                        concern2 = worker['concerns'][2]
+                        concern3 = worker['concerns'][3]
                         if len(label['manualAnnotation']) > 0:
                             ifPrivacy = True
                         for key, value in label['defaultAnnotation'].items():
@@ -397,7 +402,11 @@ class analyzer:
                                 "platform": [platform],
                                 'privacyNum': [privacy_num],
                                 'ifPrivacy': [1 if ifPrivacy else 0],
-                                'frequency': [frequency]
+                                'frequency': [frequency],
+                                'concern0': [concern0],
+                                'concern1': [concern1],
+                                'concern2': [concern2],
+                                'concern3': [concern3]
                             })
 
                         image_wise_regression_table = pd.concat([image_wise_regression_table, entry], ignore_index=True)
@@ -775,10 +784,10 @@ if __name__ == '__main__':
     input_channel.extend(category)
     output_channel = privacy_metrics
 
-    analyze.generate_img_annotation_map()
-    analyze.count_worker_privacy_num()
-    analyze.prepare_mega_table(mycat_mode = False, save_csv=True)
+    #analyze.generate_img_annotation_map()
+    #analyze.count_worker_privacy_num()
+    #analyze.prepare_mega_table(mycat_mode = False, save_csv=True)
     #analyze.basic_count()
-    #analyze.prepare_regression_model_table(read_csv=True)
+    analyze.prepare_regression_model_table(read_csv=True)
     #analyze.regression_model(input_channel=input_channel, output_channel=output_channel, read_csv=True)
     
